@@ -12,3 +12,5 @@
 
 - Inference
     → python inference.py --gpu_id=0 --mode inference --backbone resnet --backbone_layer 50 --model fcn --resume ckpt file path
+
+The model applied pre-trained resnet 50 and 101 to the fcn and deeplabv3 segmentation models.
