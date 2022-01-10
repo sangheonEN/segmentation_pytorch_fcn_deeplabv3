@@ -62,6 +62,8 @@ class Inference(solver_inf):
             lbl_pred = lbl_pred.data.max(1)[1].cpu().numpy()[:, :, :]
 
             for img, lt, lp in zip(image, label, lbl_pred):
+                # 지금 torch에서 convolution operation을 위해 transform(data shape, normalization)을 한 상태니까
+                # untransform을 통해 다시 shape과 normalization 변경해야함. 변경되는 내용은 메서드 내용에서 확인
                 img, lt = self.test_data_loader.dataset.untransform(img, lt)
                 lp = np.expand_dims(lp, -1)
                 label_trues.append(lt)

@@ -79,6 +79,8 @@ def label_accuracy_score(label_trues, label_preds, n_class):
 
 
 def augmentation_train(inputs_train_feed, masks_train_feed):
+    # torch tensor operation기준인 input shape이 (batch, channel, height, width)로 들어오니
+    # 이걸 augmentation 하기위해서는 (batch, height, width, channel)로 변환 필요.
     inputs_train_feed = np.array(inputs_train_feed).transpose(0, 2, 3, 1)
     masks_train_feed = np.array(masks_train_feed).transpose(0, 2, 3, 1)
 
@@ -108,6 +110,7 @@ def augmentation_train(inputs_train_feed, masks_train_feed):
         inputs_list.append(input)
         masks_list.append(mask)
 
+    # torch tensor operation기준인 input shape(batch, channel, height, width)으로 다시 변환.
     img = np.array(inputs_list, dtype=np.float32).transpose(0, 3, 1, 2)
     lbl = np.array(masks_list, dtype=np.int32).transpose(0, 3, 1, 2)
 

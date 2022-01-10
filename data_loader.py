@@ -109,6 +109,8 @@ class CustomImageDataset(Dataset):
         mean_resnet = np.array([0.485, 0.456, 0.406])
         std_resnet = np.array([0.229, 0.224, 0.225])
 
+        # 입력은 channel, height, width형식으로 들어오니
+        # height, width, channel shape으로 transpose 해야함.
         img = img.numpy()
         img = img.transpose(1, 2, 0)
         img *= std_resnet
